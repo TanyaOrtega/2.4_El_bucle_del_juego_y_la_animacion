@@ -1,16 +1,17 @@
 using UnityEngine;
 
-public class RatCollision : MonoBehaviour
+public class RatCollectible : MonoBehaviour
 {
-    public int points = 10; // puntos que da la rata
-
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("¡Rata atrapada! +" + points + " puntos");
+            Animator anim = other.GetComponent<Animator>();
+            if (anim != null) anim.SetTrigger("Celebrate");
+            Debug.Log("¡Rata recogida! +10 puntos");
             Destroy(gameObject); // desaparece la rata
-            // Aquí luego podemos sumar puntos a un marcador global
+            // Aquí luego podemos sumar puntos al marcador
         }
     }
 }
+
